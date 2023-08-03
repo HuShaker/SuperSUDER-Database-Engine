@@ -1,2 +1,7 @@
 # SuperSUDER-Database-Engine
-SuperSUDER is a  database engine implemented entirely in Bash scripting. This lightweight and portable database solution offers basic data storage and retrieval functionalities, making it ideal for small-scale projects, learning purposes, and quick data management tasks. 
+
+Welcome to SuperSUDER - Your Super Simple Database Engine in Bash!
+
+![SuperSUDER Logo](logo.png)
+
+SuperSUDER is a lightweight and powerful database engine implemented entirely in Bash scripting. Whether you're a beginner looking to learn about databases or a developer seeking a quick and efficient data storage solution, SuperSUDER has you covered.
