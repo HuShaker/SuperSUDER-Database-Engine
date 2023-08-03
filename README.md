@@ -31,7 +31,10 @@ SuperSUDER empowers you with a range of features to simplify your data managemen
 - **Update Table**: Modify existing data entries within tables to keep information up to date.
 
 SuperSUDER offers a seamless experience for both newcomers and experienced users, making data management a breeze with the power of Bash scripting.
-## Getting Started
 
+## Getting Started
+```sh
+$ ./SuperMenu
+```
 
  
