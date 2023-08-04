@@ -7,10 +7,10 @@ read -p "Enter the database name: " db_name
 create_database() {
      database_name="$1"
     if Validate_Name "$database_name"; then
-        if [ -d "Databases/$database_name" ]; then
+        if [ -d ../Databases/$database_name ]; then
             echo "Error: Database already exists."
         else
-            mkdir . ./../Databases/$database_name 
+            mkdir ../Databases/$database_name 
             echo "Database created successfully."
         fi
     else
