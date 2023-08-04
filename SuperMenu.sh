@@ -12,7 +12,7 @@ echo    "║  Note: Now you have become Suder, but of course, you are not like E
 echo -e "╚═════════════════════════════════════════════════════════════════════════════╝\n"
 
 echo "+==================================+"
-echo "|     Super Menu                   |"
+echo "|          Super Menu              |"
 echo "+==================================+"
 echo "| Option |     Description         |"
 echo "+--------+-------------------------+"
