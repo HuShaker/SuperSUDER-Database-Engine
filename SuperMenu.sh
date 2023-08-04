@@ -1,6 +1,6 @@
 #!/bin/bash
-source ./Extra_Functions/Error
-source ./Extra_Functions/Note
+source ./Extra_Functions/Error_Style
+source ./Extra_Functions/Header_Note
 
 #============================================================ configuration setting ==================================================================
 
