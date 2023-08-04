@@ -30,7 +30,7 @@ function fun_super_menu {
     echo -e "Enter Choice: \c"
     read smenu
     case $smenu in
-        1) echo "create_database" ;;
+        1) fun_create_database ;;
         2) fun_list_databases ;;
         3) fun_drop_database ;;
         4) fun_connect_to_databases ;;
