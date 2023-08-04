@@ -1,19 +1,16 @@
 #!/bin/bash
 source ./Extra_Functions/Error
-
+source ./Extra_Functions/Note
 
 #============================================================ configuration setting ==================================================================
 
 clear
 #export PS1="SuperSUDER >> " 
 #export PS2=">> "
-echo    "╔═════════════════════════════════════════════════════════════════════════════╗"
-echo    "║                              Hello Suders !!                                ║"
-echo    "║  Note: Now you have become Suder, but of course, you are not like Eng.Mina  ║"
-echo -e "╚═════════════════════════════════════════════════════════════════════════════╝\n"
-
+header_note
 #============================================================ Super Menu ============================================================================
 function fun_super_menu {
+    
     
     echo "+==================================+"
     echo "|          Super Menu              |"
@@ -36,7 +33,9 @@ function fun_super_menu {
         4) fun_connect_to_databases ;;
         5) exit ;;
         *) 
-        fun_error "Error: *** Wrong Choice. *** "
+        clear
+        header_note
+        fun_error "Error: *** Wrong Choice *** "
         fun_super_menu
     esac
 }
