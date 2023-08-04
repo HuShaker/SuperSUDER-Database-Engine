@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 
-function fun_connect_to_databases{
+ fun_connect_to_databases(){
 
 echo " Select your database number from the minu :"
 
 
-cd ../../Databases
+cd ../Databases
 array=('ls -F | grep "/"')
 
 
@@ -19,7 +19,7 @@ do
       continue 
 
       else 
-         cd ../../Databases/${array[${REPLY}-1]}
+         cd ../Databases/${array[${REPLY}-1]}
 
          echo " you are connected to the database "
 
