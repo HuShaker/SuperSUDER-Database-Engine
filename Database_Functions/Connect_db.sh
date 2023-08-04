@@ -2,18 +2,14 @@
 
 function fun_connect_to_databases{
 
-PS3 = "Type Your DB NUmber to connect with :"
-
-echo 
-
 echo " Select your database number from the minu :"
 
-echo 
-cd ./Databases
-array=$('ls -F | grep "/"')
+
+cd ../../Databases
+array=('ls -F | grep "/"')
 
 
-select choise in ${array[*]}
+select choice in ${array[*]}
 
 do 
    if [$REPLY -gt ${#array[*]}]
@@ -23,7 +19,7 @@ do
       continue 
 
       else 
-         cd ./Databases/${array[${REPLY}-1]}
+         cd ../../Databases/${array[${REPLY}-1]}
 
          echo " you are connected to the database "
 
@@ -34,13 +30,13 @@ do
    done 
        echo
    }
-cd -
+fun_connect_to_databases 
 
 
 #---------------------------------------------------------
 
 
-function fun_super_menu {
+function fun_table_menu {
     
     
     echo "+==================================+"
@@ -68,13 +64,13 @@ function fun_super_menu {
         6) fun_update_table      ;;
         7_ Exit                  ;;
         *)
-
+        
         clear
         header_note
         fun_error "Error: *** Wrong Choice *** "
         fun_super_menu
     esac
 }
-fun_super_menu
+fun_table_menu
 
 
