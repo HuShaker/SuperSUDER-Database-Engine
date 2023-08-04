@@ -11,6 +11,8 @@ echo    "║                              Hello Suders !!                       
 echo    "║  Note: Now you have become Suder, but of course, you are not like Eng.Mina  ║"
 echo -e "╚═════════════════════════════════════════════════════════════════════════════╝\n"
 
+#echo -e "\e[5m \033[31m   Error: Something went wrong. \033[31m  \e[0m"
+
 
 function super_menu {
     echo "+==================================+"
@@ -33,8 +35,15 @@ function super_menu {
         3) drop_database ;;
         4) connect_to_databases ;;
         5) exit ;;
-        *) echo " Wrong Choice " ; super_menu;
+        *) 
+        # \033[31m ==> For Red Color &  \e[5m ==> for Animation
+        echo -e "\e[5m   \033[31m    Error: *** Wrong Choice. ***   \033[31m  \e[0m"
+
+
+        super_menu
     esac
 }
 super_menu
+
+
 
