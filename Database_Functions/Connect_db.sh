@@ -1,6 +1,18 @@
 #!/usr/bin/bash
 
+
+
+#fun_connect_to_databases (){
+     #read -p "enter your database name :" -r connect_dbname
+    #if [ -d ../Databases $connect_dbname ]; 
+   # then
+   # cd $connect_dbname
+
+#}
+
  fun_connect_to_databases(){
+
+   
 
 echo " Select your database number from the minu :"
 
