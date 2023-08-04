@@ -39,3 +39,19 @@ cd -
 
 
 
+#do another minu for the feature in the databse 
+
+
+echo 
+PS3= "Type your choice number :"
+
+ Select choice in create_table list_table Drop_table insert_in_table select_from_table Delete_from_table update_from_table 
+  do 
+
+   case $choise in 
+
+      create_table )
+
+      echo "creating table " 
+      . ./create_Table.sh 
+      ;;
