@@ -24,7 +24,7 @@ array=$(ls -F | grep "/")
 select choice in ${array[*]}
 
 do 
-   if [$REPLY -gt ${#array[*]}]
+   if [ $REPLY -gt ${#array[*]} ]
    then 
 
       echo "$REPLY not on the minu "
