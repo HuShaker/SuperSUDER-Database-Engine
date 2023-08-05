@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 function fun_error() {
     
@@ -7,4 +7,3 @@ function fun_error() {
     echo -e "\e[5m\033[31m$1   \033[31m  \e[0m"
 
 }
-fun_error
