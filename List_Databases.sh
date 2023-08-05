@@ -15,5 +15,7 @@ function fun_list_databases {
         echo "------------------------------------"
         ((counter++))
     done
-
+    echo
+    sleep 3
+    fun_super_menu
 }
