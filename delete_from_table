@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+
+fun_delete_from_table(){
 if [[ $(ls -l | wc -l) = 1 ]]; then
     echo -e "\e[41mThere are no Tables here please Create your Tables.\e[0m"
 else
@@ -9,11 +11,12 @@ else
         rm "$tbname.data"
         rm "$tbname.meta"
         echo -e "\e[44mTable Deleted\e[0m"
-        notify-send -t 5000 -i face-sad "Unfortunately" "Table <b>$tbname</b> deleted."
+       
     else
         echo -e "\e[41mTable Not Exist\e[0m"
     fi
 fi
 
 echo ""
-. tablesMenu.sh
+}
+ fun_super_menu
