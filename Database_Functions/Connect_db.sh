@@ -17,8 +17,8 @@
 echo " Select your database number from the minu :"
 
 
-cd Databases
-array=('ls -F | grep "/"')
+cd Databases/
+array=$(ls -F | grep "/")
 
 
 select choice in ${array[*]}
