@@ -1,10 +1,12 @@
 #!/usr/bin/bash
 
-# Prompt the user to enter the database name
-read -p "Enter the database name: " db_name
+
 
 # Function to create the database
 create_database() {
+    # Prompt the user to enter the database name
+read -p "Enter the database name: " db_name
+
      database_name="$1"
     if Validate_Name "$database_name"; then
         if [ -d ../Databases$database_name ]; then

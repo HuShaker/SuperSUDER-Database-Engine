@@ -17,7 +17,7 @@
 echo " Select your database number from the minu :"
 
 
-cd ../Databases
+cd Databases
 array=('ls -F | grep "/"')
 
 
@@ -31,7 +31,7 @@ do
       continue 
 
       else 
-         cd ../Databases/${array[${REPLY}-1]}
+         cd Databases/${array[${REPLY}-1]}
 
          echo " you are connected to the database "
 
