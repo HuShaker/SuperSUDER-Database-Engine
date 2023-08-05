@@ -1,6 +1,7 @@
 #!/bin/bash
 source ./Extra_Functions/Error_Style
 source ./Extra_Functions/Header_Note
+source ./Database_Functions/test
 
 #============================================================ configuration setting ==================================================================
 
