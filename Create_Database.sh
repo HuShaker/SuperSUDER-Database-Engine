@@ -1,6 +1,4 @@
 #!/usr/bin/bash
-source ./Validate_Name.sh
-
 
 fun_create_database() {
 

@@ -2,7 +2,11 @@
 source ./Error_Style.sh
 source ./Header_Note.sh
 source ./Create_Database.sh
-#source ./test
+source ./Validate_Name.sh
+source ./Validate_Numbers.sh
+source ./List_Databases.sh
+source ./Drop_Database.sh
+source ./test
 
 #============================================================ Functions ==================================================================
 
