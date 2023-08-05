@@ -1,19 +1,30 @@
 #!/usr/bin/bash
+source ./Validate_Name.sh
 
-# Function to create the database
-Create_database() {
+
+fun_create_database() {
+
+    clear
     # Prompt the user to enter the database name
     read -p "Enter the database name: " db_name
 
-    if  Validate_Name "$db_name" ; then
+    if  fun_validate_name "$db_name" ; then
        if [ -d "./Data/$db_name" ]; then
             echo "Error: Database already exists."
+            sleep 2
+            clear
+            fun_header_note
+            fun_create_database
         else
             mkdir "./Data/$db_name"
             echo "Database created successfully."
+            sleep 2
+            clear
+            fun_super_menu
         fi
     else
-        echo "Error: Invalid database name."
+        fun_error "Error: Invalid database name."
+        sleep 3
+        fun_create_database
     fi
 }
-Create_database
