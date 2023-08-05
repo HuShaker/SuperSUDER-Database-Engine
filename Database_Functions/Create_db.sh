@@ -17,7 +17,7 @@ Create_database() {
 read -p "Enter the database name: " db_name
 
      database_name="$1"
-    if Validate_Name "$database_name"; then
+    if  Validate_Name "$database_name" ; then
         if [ -d "Databases/$database_name" ]; then
             echo "Error: Database already exists."
         else
