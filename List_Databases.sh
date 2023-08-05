@@ -8,5 +8,12 @@ function fun_list_databases {
     echo "+==================================+"
     echo "|           Avail DBs              |"
     echo "+==================================+"
- 
+    counter=1
+    for db in "${arr[@]}"; do
+        db_name=$(basename "$db")
+        echo "|   $counter               $db_name "
+        echo "------------------------------------"
+        ((counter++))
+    done
+
 }
