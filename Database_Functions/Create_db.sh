@@ -21,7 +21,7 @@ read -p "Enter the database name: " db_name
         if [ -d "Databases/$database_name" ]; then
             echo "Error: Database already exists."
         else
-            mkdir Databases/$database_name 
+            mkdir "Databases/$database_name"
             echo "Database created successfully."
         fi
     else
