@@ -1,22 +1,31 @@
 #!/usr/bin/bash
-
-fun_delete_from_table(){
-if [[ $(ls -l | wc -l) = 1 ]]; then
-    echo -e "\e[41mThere are no Tables here please Create your Tables.\e[0m"
-else
-    echo -e "\e[44mPlease Enter the name of Table you want to delete:\e[0m"
-    read tbname
-
-    if [[ -f "$tbname.data" ]]; then
-        rm "$tbname.data"
-        rm "$tbname.meta"
-        echo -e "\e[44mTable Deleted\e[0m"
-       
+delete_row(){
+    echo 'enter your column number :'
+    read -r number_
+    if  [[  ! $number_ =~ ^[0-9]+$ ]] ;
+    then
+    echo "error"
     else
-        echo -e "\e[41mTable Not Exist\e[0m"
+    sed -i "$number_ d" $tname
     fi
-fi
-
-echo ""
 }
- fun_super_menu
+
+delete_from_to(){
+    echo 'enter your start number :'
+    read -r num_start
+    echo 'enter your end number :'
+    read -r num_end
+    if  [[ ! $num_start =~ ^[0-9]+$ ]] ;
+    then
+    echo "error"
+    elif  [[ ! $num_end =~ ^[0-9]+$ ]] ;
+    then
+    echo "error"
+    else
+    sed -i "$num_start,$num_end d" $tname
+    fi
+}
+
+
+
+
