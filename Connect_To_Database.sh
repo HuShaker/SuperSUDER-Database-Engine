@@ -24,15 +24,16 @@ fun_connect_to_database () {
             cd ./Data
             $SHELL
             echo "successfully connect..."
+
         else
             echo "Invalid database number."
             sleep 2
-            fun_drop_database
+            fun_connect_to_database
         fi
     else
         echo "Invalid input. Please enter a valid number."
         sleep 2
-        fun_drop_database
+        fun_connect_to_database
     fi
 
 
