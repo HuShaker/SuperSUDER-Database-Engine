@@ -2,9 +2,20 @@
 
 fun_list__tables() {
   cd ./Data
-     ls $pwd 
+     
+     echo -e "here is the databases were found " 
 
-    fun_table_menu
+     echo 
+
+      ls $pwd 
+
+      echo 
+
+      read -p "enter your database name :"
+      clear
+      
+      ls $REPLY
+      
+      cat 
 }
-
-
+fun_list__tables
