@@ -1,15 +1,16 @@
 #!/usr/bin/bash
-
-#!/bin/bash
-
-# Define an array
-my_array=("apple" "banana" "cherry" "date" "elderberry")
-
-# Initialize a counter
-counter=1
-
-# Loop through the array and print each element with its index
-while [ $counter -le ${#my_array[@]} ]; do
-    echo "$counter: ${my_array[((counter - 1))]}"
-    ((counter++))
-done
+    select type in "string" "number"; do
+        case $type in
+            "string")
+                echo "Selected type: string"
+                break
+                ;;
+            "number")
+                echo "Selected type: number"
+                break
+                ;;
+            *)
+                echo "Invalid selection. Please choose again."
+                ;;
+        esac
+    done

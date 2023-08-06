@@ -7,7 +7,7 @@ source ./Validate_Numbers.sh
 source ./List_Databases.sh
 source ./Drop_Database.sh
 source ./Connect_To_Database.sh
-source ./test
+source ./Create_Table.sh
 
 #============================================================ Functions ==================================================================
 
@@ -76,6 +76,7 @@ function fun_table_menu {
         8) exit                  ;;
         *)
         clear
+        cd ../.. 
         fun_header_note
         fun_error "Error: *** Wrong Choice *** "
         fun_super_menu
