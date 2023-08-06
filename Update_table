@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+function updateTable {
+  echo -e "Enter Table Name: \c"
+  read tName
+  echo -e "Enter Condition Column name: \c"
+  read column
+  fid=$(awk 'BEGIN{FS="|"}{if(NR==1){for(i=1;i<=NF;i++){if($i=="'$column'") print i}}}' $tName)
+  if [[ $fid == "" ]]
+  then
+    echo "Not Found"
+
+}
