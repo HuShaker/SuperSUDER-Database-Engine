@@ -24,6 +24,8 @@ function fun_drop_database {
             clear
             echo "Database '$(basename "$deleted_db")' has been deleted."
             sleep 2
+            clear
+            fun_header_note
             fun_super_menu
         else
             echo "Invalid database number."
