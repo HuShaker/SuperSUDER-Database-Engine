@@ -6,6 +6,7 @@ source ./Validate_Name.sh
 source ./Validate_Numbers.sh
 source ./List_Databases.sh
 source ./Drop_Database.sh
+source ./Connect_To_Database.sh
 source ./test
 
 #============================================================ Functions ==================================================================
@@ -30,7 +31,7 @@ function fun_super_menu {
         1) fun_create_database      ;;
         2) fun_list_databases       ;;
         3) fun_drop_database        ;;
-        4) fun_connect_to_databases ;;
+        4) fun_connect_to_database  ;;
         5) exit                     ;;
         *) 
         clear
