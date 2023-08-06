@@ -25,23 +25,30 @@ delete_from_to(){
     sed -i "$num_start,$num_end d" $tname
     fi
 }
-delete_two_rows(){
 
-echo 'enter your the first row:'
-    read -r first
-    echo 'enter the second row :'
-    read -r second
-    if  [[ ! $first=~ ^[0-9]+$ ]] ;
-    then
-    echo "error"
-    elif  [[ ! $second =~ ^[0-9]+$ ]] ;
-    then
-    echo "error"
-    else
-    sed -i "$start,$second d" $tname
-    fi
+
+
+fun_delete_from_table(){
+    ls $pwd
+
+     echo "enter your table name "
+      read -r tname
+
+     if  ! [ -e $tname ] ;then
+                                     
+        echo 'table dont exist '
+     else
+        echo "enter your option "
+
+
+        
+
+
+
+
+
+
 
 }
-
 
 
