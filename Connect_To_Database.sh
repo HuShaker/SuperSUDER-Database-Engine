@@ -24,6 +24,8 @@ fun_connect_to_database () {
             cd ./Data
             $SHELL
             echo "successfully connect..."
+            sleep 2
+            fun_table_menu
 
         else
             echo "Invalid database number."
