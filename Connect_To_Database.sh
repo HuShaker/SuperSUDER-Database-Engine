@@ -23,7 +23,7 @@ fun_connect_to_database () {
             connect_db="${arr[$((connect_number - 1))]}"
             cd ./Data
             $SHELL
-            echo ""
+            echo "successfully connect..."
         else
             echo "Invalid database number."
             sleep 2
