@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-function updateTable {
+fun_update_table () {
   echo -e "Enter Table Name: \c"
   read tName
   echo -e "Enter Condition Column name: \c"
@@ -8,5 +8,7 @@ function updateTable {
   if [[ $fid == "" ]]
   then
     echo "Not Found"
+
+  fun_table_menu
 
 }
