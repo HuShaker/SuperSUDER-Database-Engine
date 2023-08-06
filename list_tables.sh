@@ -3,7 +3,7 @@
 fun_list__tables() {
   cd ./Data
      
-     echo -e "here is the databases were found " 
+     echo -e "here is the databases that were found " 
 
      echo 
 
@@ -16,6 +16,6 @@ fun_list__tables() {
       
       ls $REPLY
       
-      cat 
+      
 }
 fun_list__tables
