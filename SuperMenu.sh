@@ -31,7 +31,7 @@ function fun_super_menu {
         1) fun_create_database      ;;
         2) fun_list_databases       ;;
         3) fun_drop_database        ;;
-        4) fun_connect_to_database  ;;
+        4) fun_connect_to_databases ;;
         5) exit                     ;;
         *) 
         clear
@@ -45,7 +45,7 @@ function fun_table_menu {
     
     
     echo "+==================================+"
-    echo "|          Super Menu              |"
+    echo "|          Table Menu              |"
     echo "+==================================+"
     echo "| Option |     Description         |"
     echo "+--------+-------------------------+"
@@ -55,22 +55,28 @@ function fun_table_menu {
     echo "|   4    | Select from table       |"
     echo "|   5    | Delete from table       |"
     echo "|   6    | Update table            |"
-    echo "|   7    |  Exit                   |"
+    echo "|   7    | Back to Super Menu      |"
+    echo "|   8    | Exit                    |"
     echo "+--------+-------------------------+"
 
     echo -e "Enter Choice: \c"
     read smenu
     case $smenu in
-        1) fun_Create_table      ;;
+        1) fun_create_table      ;;
         2) fun_list__tables      ;;
         3) fun_drop_table        ;;
         4) fun_select_from_table ;;
         5) fun_delete_table      ;;
         6) fun_update_table      ;;
-        7) exit                  ;;
+        7) 
+        cd ../..        
+        clear                 
+        fun_header_note 
+        fun_super_menu           ;;
+        8) exit                  ;;
         *)
         clear
-        header_note
+        fun_header_note
         fun_error "Error: *** Wrong Choice *** "
         fun_super_menu
     esac
