@@ -6,7 +6,7 @@ function fun_list_databases {
     fun_header_note
     arr=(./Data/*)
     echo "+==================================+"
-    echo "|           Avail DBs              |"
+    echo "|       Available Databases        |"
     echo "+==================================+"
     counter=1
     for db in "${arr[@]}"; do

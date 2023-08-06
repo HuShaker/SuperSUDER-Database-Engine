@@ -14,5 +14,8 @@ function fun_drop_database {
         echo "------------------------------------"
         ((counter++))
     done
+    echo
+    read -p "Enter the number of the database: " delete_number
+
 
 }
