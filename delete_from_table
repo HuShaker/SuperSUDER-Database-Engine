@@ -9,6 +9,9 @@ delete_one_row(){
     sed -i "$number_ d" $tname
     fi
 }
+delete_one_row
+
+#---------------------------- 
 
 delete_from_to(){
     echo 'enter your start number :'
@@ -25,7 +28,8 @@ delete_from_to(){
     sed -i "$num_start,$num_end d" $tname
     fi
 }
-
+delete_from_to
+#-----------------------------------
 
 fun_delete_from_table(){
     ls "$PWD"
