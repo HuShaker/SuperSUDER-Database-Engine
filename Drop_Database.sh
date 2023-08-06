@@ -17,5 +17,13 @@ function fun_drop_database {
     echo
     read -p "Enter the number of the database: " delete_number
 
+    if [[ $delete_number =~ ^[0-9]+$ ]]; then
+
+    else
+        echo "Invalid input. Please enter a valid number."
+        sleep 2
+        fun_drop_database
+    fi
+
 
 }
