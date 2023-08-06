@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-delete_row(){
+delete_one_row(){
     echo 'enter your column number :'
     read -r number_
     if  [[  ! $number_ =~ ^[0-9]+$ ]] ;
@@ -25,7 +25,23 @@ delete_from_to(){
     sed -i "$num_start,$num_end d" $tname
     fi
 }
+delete_two_rows(){
 
+echo 'enter your the first row:'
+    read -r first
+    echo 'enter the second row :'
+    read -r second
+    if  [[ ! $first=~ ^[0-9]+$ ]] ;
+    then
+    echo "error"
+    elif  [[ ! $second =~ ^[0-9]+$ ]] ;
+    then
+    echo "error"
+    else
+    sed -i "$start,$second d" $tname
+    fi
+
+}
 
 
 
