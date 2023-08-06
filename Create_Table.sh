@@ -21,7 +21,22 @@ fun_create_table() {
         echo -e "Enter Columns Count: \c" 
         read columnCount
         if fun_validate_number "$columnCount"; then
-            
+            #Valid Columns Count
+            metaName=""
+            metaType=""
+            pKey="no"
+            metaPK=""
+            for ((i = 1; i <= $columnCount; i++)); do
+                 
+            done   
+            touch "./${tableName}_data" "./${tableName}_metadata"
+            echo "$metaName" >> "./${tableName}_metadata"
+            echo "$metaType" >> "./${tableName}_metadata"
+            echo "$metaPK" >> "./${tableName}_metadata"
+            echo "Table created successfully..."
+            sleep 5
+            clear
+            fun_table_menu
         else
             #Invalid Number
             echo "Invalid input. Please enter a valid Columns Count."
