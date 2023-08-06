@@ -27,36 +27,35 @@ delete_from_to(){
 }
 
 
-
 fun_delete_from_table(){
-    
-    ls $pwd
+    ls "$PWD"
+    echo "Enter your table name:"
+    read -r tname
 
-     echo "enter your table name "
-      read -r tname
-
-    if  ! [ -e $tname ] ;then
-                                     
-        echo 'table doesn't exist '
+    if ! [[ -e "$tname" ]]; then
+        echo "Error: Table $tname doesn't exist."
     else
-       echo "enter your option "
-
-     select option in delete_one_row delete_from_to 
-     
-      case $option in 
-        
-            1 )
-              delete_one_row ;;
-
-            2 ) 
-              delete_from_to ;;
-
-            *) echo "wrong choice :" ;;
-
-      esac 
-   fi  
+        echo "Enter your option:"
+        select option in delete_one_row delete_from_to; do
+            case $option in
+                1)
+                    delete_one_row
+                    break
+                    ;;
+                2)
+                    delete_from_to
+                    break
+                    ;;
+                *)
+                    echo "Error: Invalid choice."
+                    ;;
+            esac
+        done
+    fi
 }
-    
+
+fun_delete_from_table
+
         
 
 
@@ -65,6 +64,6 @@ fun_delete_from_table(){
 
 
 
-}
+
 
 
