@@ -10,8 +10,9 @@ fun_list__tables() {
       ls -d */ | sed 's/[/]// '
 
       echo 
+      sleep 2
 
-    
+    fun_table_menu 
       
 }
 fun_list__tables
