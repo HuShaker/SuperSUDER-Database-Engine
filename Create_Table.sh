@@ -18,7 +18,17 @@ fun_create_table() {
             clear
             fun_create_table
         fi
-        
+        echo -e "Enter Columns Count: \c" 
+        read columnCount
+        if fun_validate_number "$columnCount"; then
+            
+        else
+            #Invalid Number
+            echo "Invalid input. Please enter a valid Columns Count."
+            sleep 2
+            clear
+            fun_create_table
+        fi
 
     else
         #Invalid Name
