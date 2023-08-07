@@ -14,3 +14,21 @@ select_all_table () {
 }
 select_all_table
 
+
+select_one_row(){
+    ls -F |grep -v 'metadata' 
+    echo -e "Enter the name of the table you want to select from : \c"
+    read tname
+  
+    if [[ -f ${tname} ]]; then
+    echo 'enter the id number :'
+    read -r number_
+    if  [[  ! $number_ =~ ^[0-9]+$ ]] ;
+    then
+    echo "error"
+    else
+    sed -n "$number_ p" $tname
+    echo "the row $number has been selected:"
+    fi
+}
+select_one_row
