@@ -1,12 +1,13 @@
 #!/usr/bin/bash
 delete_one_row(){
-    echo 'enter your column number :'
+    echo 'enter your row number :'
     read -r number_
     if  [[  ! $number_ =~ ^[0-9]+$ ]] ;
     then
     echo "error"
     else
     sed -i "$number_ d" $tname
+    echo "the row $number has been deletted :"
     fi
 }
 delete_one_row
@@ -26,6 +27,8 @@ delete_from_to(){
     echo "error"
     else
     sed -i "$num_start,$num_end d" $tname
+    echo "the rows have been deleted :"
+    
     fi
 }
 delete_from_to
