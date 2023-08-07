@@ -48,7 +48,39 @@ fun_create_table() {
                                 ;;
                         esac
                     done
-                       
+                    #Choose Primary Key ("Yes","No")
+                    if [ "$pKey" == "no" ]; then
+                        echo "Is it Primary Key?"
+                        select isPkey in "Yes" "No"; do
+                            case $isPkey in
+                                "Yes")
+                                    isPkey="yes"
+                                    pKey="yes"
+                                    break
+                                    ;;
+                                "No")
+                                    isPkey="no"
+                                    break
+                                    ;;
+                                *)
+                                    echo "Invalid selection. Please choose again."
+                                    sleep 2
+                                    clear
+                                    ;;
+                            esac
+                        done
+                    else
+                        isPkey="no"
+                        echo "There is already a primary key column"
+                    fi
+
+                else
+                    #Invalid Cloumn Name
+                    echo "Invalid input. Please enter a valid Cloumn Name."
+                    sleep 2
+                    clear
+                    fun_create_table
+                fi   
             done   
             touch "./${tableName}_data" "./${tableName}_metadata"
             echo "$metaName" >> "./${tableName}_metadata"
