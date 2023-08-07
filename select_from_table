@@ -1,15 +1,16 @@
 #!/bin/bash
-select_Table () {
+select_all_table () {
+    cd ./Data/shereen
 
-    ls -F |grep -v 'metadata' | sed  ' s/_data$// '
+    ls -F |grep -v 'metadata' 
     echo -e "Enter the name of the table you want to select from : \c"
     read tname
   
-    if [[ -f ${tname}.txt ]]; then
-        cat ${tname}.txt
+    if [[ -f ${tname} ]]; then
+        cat ${tname}
     else
-        echo "Error displaying table ${tname}.txt"
+        echo "Error displaying table $tname"
     fi
-    fun_table_menu
 }
-fun_select_from_table
+select_all_table
+
