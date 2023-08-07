@@ -1,6 +1,6 @@
 #!/bin/bash
 select_all_table () {
-    cd ./Data/shereen
+    
 
     ls -F |grep -v 'metadata' 
     echo -e "Enter the name of the table you want to select from : \c"
