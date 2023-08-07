@@ -73,7 +73,24 @@ fun_create_table() {
                         isPkey="no"
                         echo "There is already a primary key column"
                     fi
-
+                    #Add the column name in a variable called metaName
+                    if [ $i == $columnCount ]; then
+                        metaName+="$columnName"
+                    else
+                        metaName+="${columnName}:"
+                    fi
+                    #Add Primary Key type in a variable called metaType
+                    if [ $i == $columnCount ]; then
+                        metaType+="$type"
+                    else
+                        metaType+="${type}:"
+                    fi
+                    #Add the column type in a variable called metaPK
+                    if [ $i == $columnCount ]; then
+                        metaPK+="$isPkey"
+                    else
+                        metaPK+="${isPkey}:"
+                    fi
                 else
                     #Invalid Cloumn Name
                     echo "Invalid input. Please enter a valid Cloumn Name."
