@@ -27,7 +27,28 @@ fun_create_table() {
             pKey="no"
             metaPK=""
             for ((i = 1; i <= $columnCount; i++)); do
-                 
+                echo -e "Enter Column Name: \c"
+                read columnName
+                if fun_validate_name "$columnName"; then
+                    #Choose Type ("String","Number")
+                    select type in "String" "Number"; do
+                        case $type in
+                            "String")
+                                type="string"
+                                break
+                                ;;
+                            "Number")
+                                type="number"
+                                break
+                                ;;
+                            *)
+                                echo "Invalid selection. Please choose again."
+                                sleep 2
+                                clear
+                                ;;
+                        esac
+                    done
+                       
             done   
             touch "./${tableName}_data" "./${tableName}_metadata"
             echo "$metaName" >> "./${tableName}_metadata"

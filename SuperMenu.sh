@@ -8,6 +8,8 @@ source ./List_Databases.sh
 source ./Drop_Database.sh
 source ./Connect_To_Database.sh
 source ./Create_Table.sh
+source ./List_Tables.sh
+source ./Drop_Tables.sh
 
 #============================================================ Functions ==================================================================
 
@@ -63,7 +65,7 @@ function fun_table_menu {
     read smenu
     case $smenu in
         1) fun_create_table      ;;
-        2) fun_list__tables      ;;
+        2) fun_list_tables       ;;
         3) fun_drop_table        ;;
         4) fun_select_from_table ;;
         5) fun_delete_table      ;;
