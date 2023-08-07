@@ -19,7 +19,7 @@ fun_drop_table() {
     if [[ $delete_number =~ ^[0-9]+$ ]]; then
         if [ "$delete_number" -ge 1 ] && [ "$delete_number" -le "${#mytables[@]}" ]; then
             deleted_table="${mytables[$((delete_number - 1))]}"
-            rm -r "${deleted_table}_metadata" "${deleted_table}_data"  # Delete the table directory
+            rm -r "${deleted_table}_metadata" "${deleted_table}_data"
             clear
             echo "Table ${deleted_table} has been deleted."
             sleep 3
