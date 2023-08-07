@@ -9,8 +9,8 @@ fun_list__tables() {
 
      ls -F |grep  -v  'metadata | sed  ' s/_data$// '
 
-      echo 
-      sleep 2
+     echo 
+     sleep 2
 
     fun_table_menu 
       
