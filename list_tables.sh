@@ -7,7 +7,7 @@ fun_list__tables() {
 
      echo 
 
-     ls -F |grep -v 'metadata | sed  ' s/_data$// '
+     ls -F |grep -v 'metadata' | sed  ' s/_data$// '
 
      echo 
      sleep 2
