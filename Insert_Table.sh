@@ -36,11 +36,11 @@ fun_insert_table() {
             colpk_array=(${colpk//:/ })
             # Print out the arrays
             echo "Column Names:"
-            echo ${colnames_array[@]}
+            echo ${colnames_array[0]}
             echo "Column Types:" 
-            echo ${coltypes_array[@]}
+            echo ${coltypes_array[0]}
             echo "Primary Keys:"
-            echo ${colpk_array[@]}
+            echo ${colpk_array[0]}
 
 
         else
