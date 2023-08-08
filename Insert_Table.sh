@@ -34,7 +34,9 @@ fun_insert_table() {
             colnames_array=(${colnames//:/ })
             coltypes_array=(${coltypes//:/ }) 
             colpk_array=(${colpk//:/ })
-
+            #number of colums
+            column_number=${#array[@]}
+            
 
 
         else
