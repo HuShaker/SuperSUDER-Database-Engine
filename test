@@ -1,16 +1,46 @@
-#!/usr/bin/bash
-    select type in "string" "number"; do
-        case $type in
-            "string")
-                echo "Selected type: string"
-                break
-                ;;
-            "number")
-                echo "Selected type: number"
-                break
-                ;;
-            *)
-                echo "Invalid selection. Please choose again."
-                ;;
-        esac
-    done
+#!/bin/bash
+
+table_name="your_table_name"
+data_file="${table_name}_data"
+metadata_file="${table_name}_Metadata"
+
+function is_uniq_column() {
+    local column_name="$1"
+    local is_uniq=$(awk -F':' -v col="$column_name" '$1 == "note" && $2 == "yes" { print "yes"; exit }' "$metadata_file")
+    [[ "$is_uniq" == "yes" ]]
+}
+
+function is_valid_data() {
+    local column_name="$1"
+    local input="$2"
+
+    local data_type=$(awk -F':' -v col="$column_name" '$1 == col { print $2 }' "$metadata_file")
+
+    if [[ "$data_type" == "number" && ! "$input" =~ ^[0-9]+$ ]]; then
+        return 1
+    elif [[ "$data_type" == "string" && "$input" =~ [0-9] ]]; then
+        return 1
+    fi
+
+    if is_uniq_column "$column_name"; then
+        local existing_data=$(cut -d':' -f "$column_name" "$data_file" | grep -w "$input")
+        [[ -z "$existing_data" ]]
+    else
+        return 0
+    fi
+}
+
+function insert_data() {
+    local id="$1"
+    local name="$2"
+
+    if is_valid_data "id" "$id" && is_valid_data "name" "$name"; then
+        echo "$id:$name" >> "$data_file"
+        echo "Data inserted successfully."
+    else
+        echo "Invalid or non-unique data. Data insertion failed."
+    fi
+}
+
+# Usage example:
+insert_data 3 "bob"

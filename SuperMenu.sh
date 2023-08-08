@@ -10,6 +10,7 @@ source ./Connect_To_Database.sh
 source ./Create_Table.sh
 source ./List_Tables.sh
 source ./Drop_Tables.sh
+source ./Insert_Table.sh
 
 #============================================================ Functions ==================================================================
 
@@ -57,8 +58,9 @@ function fun_table_menu {
     echo "|   4    | Select from table       |"
     echo "|   5    | Delete from table       |"
     echo "|   6    | Update table            |"
-    echo "|   7    | Back to Super Menu      |"
-    echo "|   8    | Exit                    |"
+    echo "|   7    | Insert into Table       |"
+    echo "|   8    | Back to Super Menu      |"
+    echo "|   9    | Exit                    |"
     echo "+--------+-------------------------+"
 
     echo -e "Enter Choice: \c"
@@ -70,12 +72,13 @@ function fun_table_menu {
         4) fun_select_from_table ;;
         5) fun_delete_table      ;;
         6) fun_update_table      ;;
-        7) 
+        7) fun_insert_table      ;;
+        8) 
         cd ../..        
         clear                 
         fun_header_note 
         fun_super_menu           ;;
-        8) exit                  ;;
+        9) exit                  ;;
         *)
         clear
         cd ../.. 
@@ -87,6 +90,7 @@ function fun_table_menu {
 #============================================================ Starting ============================================================================
 
 clear
+PS3="SuperSUDER >> "
 fun_header_note
 fun_super_menu
 
