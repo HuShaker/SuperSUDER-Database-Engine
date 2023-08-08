@@ -20,6 +20,28 @@ fun_insert_table() {
         if [ "$table_number" -ge 1 ] && [ "$table_number" -le "${#mytables[@]}" ]; then
             current_table="${mytables[$((table_number - 1))]}"
 
+            # Extract line 1 
+            sed -n '1p;1q' "${current_table}_metadata" > tmpfile
+            read -r colnames < tmpfile
+            # Extract line 2
+            sed -n '2p;2q' "${current_table}_metadata" > tmpfile
+            read -r coltypes < tmpfile 
+            # Extract line 3
+            sed -n '3p;3q' "${current_table}_metadata" > tmpfile
+            read -r colpk < tmpfile
+            rm tmpfile
+            # Split the columns into arrays 
+            colnames_array=(${colnames//:/ })
+            coltypes_array=(${coltypes//:/ }) 
+            colpk_array=(${colpk//:/ })
+            # Print out the arrays
+            echo "Column Names:"
+            echo ${colnames_array[@]}
+            echo "Column Types:" 
+            echo ${coltypes_array[@]}
+            echo "Primary Keys:"
+            echo ${colpk_array[@]}
+
 
         else
             echo "Invalid table number."
@@ -31,5 +53,4 @@ fun_insert_table() {
         sleep 3
         fun_insert_table
     fi
-
 }
