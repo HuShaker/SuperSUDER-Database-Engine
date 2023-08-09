@@ -1,5 +1,26 @@
 #!/bin/bash
 
+fun_check_pk() {
+
+    if [ "${colpk_array[$((i - 1))]}" == "yes" ]; then
+        
+        # Get count of matches , $1 => input_value, $2 => tableName_data
+        count=$(grep -c "$1" "$2")
+
+        # Check if more than 1 match
+        if [ "$count" -gt 1 ]; then
+            echo "$input_value is not unique in $data_file"
+            exit 1
+        fi
+
+    fi
+
+
+
+
+}
+
+
 fun_insert_table() {
 
     clear
@@ -44,7 +65,10 @@ fun_insert_table() {
                     if [ "${coltypes_array[$((i - 1))]}" == "string" ]; then
                         #Check the string is valid or not
                         if fun_validate_name "$current_column"; then
-
+                            #Check is Primary Key or not
+                            if [ "${colpk_array[$((i - 1))]}" == "yes" ]; then
+                                
+                            fi
                             strFlag=1
                         else
                             echo "This column should be only \""${coltypes_array[$((i - 1))]}"\"" 
