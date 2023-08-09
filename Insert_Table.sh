@@ -2,16 +2,28 @@
 
 fun_check_pk() {
 
-    if [ "${colpk_array[$((i - 1))]}" == "yes" ]; then
-        
-        # Get count of matches , $1 => input_value, $2 => tableName_data
-        count=$(grep -c "$1" "$2")
 
-        # Check if more than 1 match
-        if [ "$count" -gt 1 ]; then
-            echo "$input_value is not unique in $data_file"
-            exit 1
+    #$1 => input_value, $2 => tableName_data
+    col_num="$((i - 1))"
+    if [ "${colpk_array[$((i - 1))]}" == "yes" ]; then
+        colDataCount=$(cat ${current_table}_data | cut -d : -f $i | grep ^"$current_column"$ |wc -l)
+        if [ $colDataCount -gt 0 ]; then
+            echo "Primary Key is already Exist"
         fi
+        # # Get count of matches 
+        # count=$(grep -c "$1" "$2")
+        # # Construct regex to match only given column
+        # regex="^$(echo "$1" | sed "s/./&:/$col_num")"
+        # echo "$regex"
+        # # Get count of matches
+        # count=$(grep -c "$regex" "$2")
+        # echo "PK ==> $count"
+        # # Check if more than 1 match
+        # if [ "$count" -gt 1 ]; then
+        #     echo "Please enter a unique value"
+        # else
+        #     echo "PK Yesssss333333"
+        # fi
 
     fi
 
@@ -56,19 +68,17 @@ fun_insert_table() {
             coltypes_array=(${coltypes//:/ }) 
             colpk_array=(${colpk//:/ })
             #columns count
-            columns_count="${#array[@]}"
-            for ((i = 1; i <= $columns_count; i++)); do
+            columns_count=${#colnames_array[@]}
+            for ((i=1;i<=$columns_count;i++)); do
                 #Check the current column is string or int 
                 strFlag=0
-                do
+                while [ $strFlag != 1 ]; do
                     read -p "Enter the \"${colnames_array[$((i - 1))]}\": " current_column
                     if [ "${coltypes_array[$((i - 1))]}" == "string" ]; then
                         #Check the string is valid or not
                         if fun_validate_name "$current_column"; then
                             #Check is Primary Key or not
-                            if [ "${colpk_array[$((i - 1))]}" == "yes" ]; then
-                                
-                            fi
+                            fun_check_pk "$current_column" "${current_table}_data"
                             strFlag=1
                         else
                             echo "This column should be only \""${coltypes_array[$((i - 1))]}"\"" 
@@ -76,7 +86,13 @@ fun_insert_table() {
                         fi  
                     elif [ "${coltypes_array[$((i - 1))]}" == "number" ]; then
                         #Check the number is valid or not
+
                         if fun_validate_number "$current_column"; then
+
+                            #Check is Primary Key or not
+                            fun_check_pk "$current_column" "${current_table}_data"
+
+                           
                             strFlag=1
                         else
                             echo "This column should be only \""${coltypes_array[$((i - 1))]}"\"" 
@@ -86,8 +102,7 @@ fun_insert_table() {
                         echo "This column should be only \""${coltypes_array[$((i - 1))]}"\"" 
                         echo
                     fi
-                done while [ "$strFlag" == 1 ]
-
+                done
 
             done
 
