@@ -22,7 +22,7 @@ select_one_row () {
     if [[ -f ${tname} ]]; then
     echo 'enter the id number :'
     read -r number_
-    if  [[  ! $number_ =~ ^[0-9]+$ ]] ;
+    if  [[  ! $number =~ ^[0-9]+$ ]] ;
     then
     echo "error"
     else
