@@ -15,7 +15,7 @@ select_all_table () {
 select_all_table
 
 
-select_one_row(){
+select_one_row () {
     ls -F |grep -v 'metadata' 
     echo -e "Enter the name of the table you want to select from : \c"
     read tname
@@ -27,8 +27,29 @@ select_one_row(){
     then
     echo "error"
     else
-    sed -n "$number_ p" $tname
+    sed -n "$number p" $tname
     echo "the row $number has been selected:"
     fi
 }
 select_one_row
+
+fun_select_from_table  () {
+    echo "enter your option :"
+       select option in select_all_table select_one_row 
+       do 
+
+       case $option in 
+            
+            1 ) 
+             select_all_table ;; 
+
+             2 ) 
+             select_one_row   ;; 
+
+             * ) 
+             echo " invalid option :" ;; 
+
+         esac
+
+
+}
