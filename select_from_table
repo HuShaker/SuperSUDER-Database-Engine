@@ -12,7 +12,6 @@ select_all_table () {
         echo "Error displaying table $tname"
     fi
 }
-select_all_table
 
 
 select_one_row () {
@@ -31,7 +30,6 @@ select_one_row () {
     echo "the row $number has been selected:"
     fi
 }
-select_one_row
 
 fun_select_from_table  () {
     echo "enter your option :"
