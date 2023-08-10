@@ -2,14 +2,16 @@
 
 fun_check_pk() {
 
-
     #$1 => input_value, $2 => tableName_data
     col_num="$((i - 1))"
     if [ "${colpk_array[$((i - 1))]}" == "yes" ]; then
         colDataCount=$(cat ${current_table}_data | cut -d : -f $i | grep ^"$current_column"$ |wc -l)
         if [ $colDataCount -gt 0 ]; then
             echo "Primary Key is already Exist"
+            sleep 3
+            fun_insert_table
         fi
+    fi
         # # Get count of matches 
         # count=$(grep -c "$1" "$2")
         # # Construct regex to match only given column
@@ -24,12 +26,6 @@ fun_check_pk() {
         # else
         #     echo "PK Yesssss333333"
         # fi
-
-    fi
-
-
-
-
 }
 
 
@@ -78,7 +74,12 @@ fun_insert_table() {
                         #Check the string is valid or not
                         if fun_validate_name "$current_column"; then
                             #Check is Primary Key or not
-                            fun_check_pk "$current_column" "${current_table}_data"
+                            fun_check_pk
+                            if [ $i == $columns_count ]; then
+                                finalData+="$current_column"
+                            else
+                                finalData+="$current_column:"
+                            fi
                             strFlag=1
                         else
                             echo "This column should be only \""${coltypes_array[$((i - 1))]}"\"" 
@@ -86,13 +87,15 @@ fun_insert_table() {
                         fi  
                     elif [ "${coltypes_array[$((i - 1))]}" == "number" ]; then
                         #Check the number is valid or not
-
                         if fun_validate_number "$current_column"; then
-
                             #Check is Primary Key or not
-                            fun_check_pk "$current_column" "${current_table}_data"
+                            fun_check_pk
+                            if [ $i == $columns_count ]; then
+                                finalData+="$current_column"
+                            elif [[ $i -lt $columns_count ]]; then
+                                finalData+="$current_column:"
 
-                           
+                            fi
                             strFlag=1
                         else
                             echo "This column should be only \""${coltypes_array[$((i - 1))]}"\"" 
@@ -103,11 +106,16 @@ fun_insert_table() {
                         echo
                     fi
                 done
-
             done
-
-
-
+            echo 
+            #finalData=$(echo "$finalData" | sed 's/^[[:space:]]*$//')
+            #Insert Data into the Table Data File
+            echo -e "$finalData" >> "./${current_table}_data"
+            finalData=""
+            echo "Table has been Inserted successfully..."
+            sleep 3
+            clear
+            fun_table_menu
         else
             echo "Invalid table number."
             sleep 3
