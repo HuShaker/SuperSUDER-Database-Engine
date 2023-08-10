@@ -4,7 +4,7 @@ fun_update_table () {
   read tName
   echo -e "Enter Condition Column name: \c"
   read column
-  fid=$(awk 'BEGIN{FS="|"}{if(NR==1){for(i=1;i<=NF;i++){if($i=="'$column'") print i}}}' $tName)
+  fid=$(awk 'BEGIN{FS=":"}{if(NR==1){for(i=1;i<=NF;i++){if($i=="'$column'") print i}}}' $tName)
   if [[ $fid == "" ]]
   then
     echo "Not Found"
@@ -13,7 +13,7 @@ fun_update_table () {
   else
     echo -e "Enter Condition Value: \c"
     read val
-    res=$(awk 'BEGIN{FS="|"}{if ($'$fid'=="'$val'") print $'$fid'}' $tName 2>>./.error.log)
+    res=$(awk 'BEGIN{FS=":"}{if ($'$fid'=="'$val'") print $'$fid'}' $tName 2>>./.error.log)
     if [[ $res == "" ]]
     then
       echo "Value Not Found"
@@ -23,7 +23,7 @@ fun_update_table () {
     else
       echo -e "Enter FIELD name to set: \c"
       read setField
-      setFid=$(awk 'BEGIN{FS="|"}{if(NR==1){for(i=1;i<=NF;i++){if($i=="'$setField'") print i}}}' $tName)
+      setFid=$(awk 'BEGIN{FS=":"}{if(NR==1){for(i=1;i<=NF;i++){if($i=="'$setField'") print i}}}' $tName)
       if [[ $setFid == "" ]]
       then
         echo "Not Found"
