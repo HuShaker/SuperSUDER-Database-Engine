@@ -41,7 +41,35 @@ delete_multi_row(){
     fi 
 }
 
+fun_delete_from_table() {
 
+    select option in "One Row" "Multi Rows" "All Rows"; do
+        case $option in
+            "One Row")
+                delete_one_row
+                sleep 3
+                fun_table_menu
+                ;;
+            "Multi Rows")
+                delete_multi_row
+                fun_table_menu
+                ;;
+            "All Rows")
+                echo -n "" > "./${current_table}_data"
+                 echo "the rows have been deleted..."
+                sleep 3
+                clear
+                fun_table_menu
+                ;;
+            *)
+                echo "Invalid selection. Please choose again."
+                sleep 3
+                clear
+                fun_table_menu
+                ;;
+        esac
+    done
+}
 
 
 
