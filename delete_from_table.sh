@@ -1,76 +1,21 @@
 #!/usr/bin/bash
+
 delete_one_row(){
-    echo 'enter your row number :'
-    read -r number_
-    if  [[  ! $number_ =~ ^[0-9]+$ ]] ;
-    then
-    echo "error"
-    else
-    sed -i "$number_ d" $tname
-    echo "the row $number has been deletted :"
-    fi
-}
-delete_one_row
 
-#---------------------------- 
-
-delete_from_to(){
-    echo 'enter your start number :'
-    read -r num_start
-    echo 'enter your end number :'
-    read -r num_end
-    if  [[ ! $num_start =~ ^[0-9]+$ ]] ;
-    then
-    echo "error"
-    elif  [[ ! $num_end =~ ^[0-9]+$ ]] ;
-    then
-    echo "error"
-    else
-    sed -i "$num_start,$num_end d" $tname
-    echo "the rows have been deleted :"
-    
-    fi
-}
-delete_from_to
-#-----------------------------------
-
-fun_delete_from_table(){
-    ls "$PWD"
-    echo "Enter your table name:"
-    read -r tname
-
-    if ! [[ -e "$tname" ]]; then
-        echo "Error: Table $tname doesn't exist."
-    else
-        echo "Enter your option:"
-        select option in delete_one_row delete_from_to; do
-            case $option in
-                1)
-                    delete_one_row
-                    break
-                    ;;
-                2)
-                    delete_from_to
-                    break
-                    ;;
-                *)
-                    echo "Error: Invalid choice."
-                    ;;
-            esac
-        done
-    fi
-}
-
-fun_delete_from_table
-
+    fun_choose_table
+    read -p "Enter the ID Number: " idNumber
+    row=$(awk -F':' '$1=="'$idNumber'"' "./${current_table}_data") 
+    if [ "$row" == "" ]; then
         
-
-
-
-
-
-
-
-
-
+        echo "ID number not exist"
+        sleep 3
+        clear
+    else
+        clear
+        sed -i "/$idNumber/d" "./${current_table}_data"
+        echo "the row \" $idNumber \" has been deleted..."
+        sleep 3
+        #clear
+    fi 
+}
 
