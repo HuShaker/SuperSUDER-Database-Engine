@@ -43,4 +43,43 @@ fun_update_table() {
                             data_types=($(sed -n '2p' "./${current_table}_metadata" | tr ':' ' '))
                         fi
                         
-                        
+                    done
+                    if [ "${data_types[$fIndex]}" == "string" ]; then
+                        if fun_validate_name "$oldValue" && fun_validate_name "$newValue"; then
+                            #rownum=$(awk -v val="$value" '$0 ~ val {print NR}' "./${current_table}_metadata")
+                            #echo "$rownum"
+                            #sed -i "${rownum}s/$oldValue/$newValue/" "./${current_table}_data" 
+                            sed -i "s/$oldValue/$newValue/" "./${current_table}_data" 
+                            echo "Row Updated Successfully..."
+                            sleep 3
+                            clear
+                            fun_table_menu
+                        else
+                            echo "Your Values are not valid"
+                            sleep 3
+                            clear
+                            fun_update_table
+                        fi
+                    else
+                        echo "Try again"
+                        sleep 3
+                        fun_update_table   
+                    fi 
+
+                else
+                    echo "\"$oldValue\" doesn't exist"
+                    sleep 3
+                    fun_update_table
+                fi
+            fi
+        else
+        echo "Invalid table number."
+        sleep 3
+        fun_update_table
+        fi
+    else
+        echo "Invalid input. Please enter a valid number."
+        sleep 3
+        fun_update_table
+    fi
+}
