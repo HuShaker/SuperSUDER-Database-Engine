@@ -42,14 +42,12 @@ fun_update_table() {
                             fIndex=$index
                             data_types=($(sed -n '2p' "./${current_table}_metadata" | tr ':' ' '))    
                         fi
-                        
                     done
+                    #Get index of the old row in the file
+                    rowIndex=$(grep -nF "$value" "./${current_table}_data" | cut -d: -f1)
                     if [ "${data_types[$fIndex]}" == "string" ]; then
                         if fun_validate_name "$oldValue" && fun_validate_name "$newValue"; then
-                            #sed -i "${value}s/$oldValue/$newValue/" "./${current_table}_data" 
-                            ww=$(sed -i ''"${1}"'s/'"${oldValue}"'/'"${newValue}"'/'"./${current_table}_data")
-                            echo "$ww"
-                            exit
+                            sed -i "$rowIndex s/$oldValue/$newValue/" "./${current_table}_data" 
                             fun_success "Row Updated Successfully..."
                             sleep 3
                             clear
@@ -63,7 +61,7 @@ fun_update_table() {
                     fi 
                     if [ "${data_types[$fIndex]}" == "number" ]; then
                         if fun_validate_number "$oldValue" && fun_validate_number "$newValue"; then
-                            sed -i "s/$oldValue/$newValue/" "./${current_table}_data" 
+                            sed -i "$rowIndex s/$oldValue/$newValue/" "./${current_table}_data" 
                             fun_success "Row Updated Successfully..."
                             sleep 3
                             clear
