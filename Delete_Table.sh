@@ -19,6 +19,17 @@ delete_one_row(){
     fi 
 }
 
+delete_multi_row(){
+
+    fun_choose_table
+    read -p "Enter the first ID Number: " first_ID_Number
+    read -p "Enter the last ID Number: " last_ID_Number
+    fRow=$(awk -F':' '$1=="'$first_ID_Number'"' "./${current_table}_data")
+    lRow=$(awk -F':' '$1=="'$last_ID_Number'"' "./${current_table}_data")
+
+
+}
+
 
 
 
