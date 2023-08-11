@@ -11,6 +11,9 @@ source ./Create_Table.sh
 source ./List_Tables.sh
 source ./Drop_Tables.sh
 source ./Insert_Table.sh
+source ./Update_Table.sh
+source ./Select_Table.sh
+source ./Delete_Table.sh
 
 #============================================================ Functions ==================================================================
 
@@ -46,7 +49,6 @@ function fun_super_menu {
 
 function fun_table_menu {
     
-    
     echo "+==================================+"
     echo "|          Table Menu              |"
     echo "+==================================+"
@@ -69,8 +71,8 @@ function fun_table_menu {
         1) fun_create_table      ;;
         2) fun_list_tables       ;;
         3) fun_drop_table        ;;
-        4) fun_select_from_table ;;
-        5) fun_delete_table      ;;
+        4) fun_Select_from_table ;;
+        5) fun_delete_from_table ;;
         6) fun_update_table      ;;
         7) fun_insert_table      ;;
         8) 
@@ -90,6 +92,7 @@ function fun_table_menu {
 #============================================================ Starting ============================================================================
 
 clear
+PS2="SuperSUDER >> "
 PS3="SuperSUDER >> "
 fun_header_note
 fun_super_menu
