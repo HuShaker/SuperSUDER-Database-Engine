@@ -1,47 +1,46 @@
 #!/usr/bin/bash
-fun_update_table () {
-  echo -e "Enter Table Name: \c"
-  read tName
-  echo -e "Enter Condition Column name: \c"
-  read column
-  fid=$(awk 'BEGIN{FS=":"}{if(NR==1){for(i=1;i<=NF;i++){if($i=="'$column'") print i}}}' $tName)
-  if [[ $fid == "" ]]
-  then
-    echo "Not Found"
 
-  fun_table_menu
-  else
-    echo -e "Enter Condition Value: \c"
-    read val
-    res=$(awk 'BEGIN{FS=":"}{if ($'$fid'=="'$val'") print $'$fid'}' $tName 2>>./.error.log)
-    if [[ $res == "" ]]
-    then
-      echo "Value Not Found"
-
-      fun_table_menu
-
-    else
-      echo -e "Enter FIELD name to set: \c"
-      read setField
-      setFid=$(awk 'BEGIN{FS=":"}{if(NR==1){for(i=1;i<=NF;i++){if($i=="'$setField'") print i}}}' $tName)
-      if [[ $setFid == "" ]]
-      then
-        echo "Not Found"
-
-        fun_table_menu
-
-      else
-        echo -e "Enter new Value to set: \c"
-        read newValue
-        NR=$(awk 'BEGIN{FS="|"}{if ($'$fid' == "'$val'") print NR}' $tName 2>>./.error.log)
-        oldValue=$(awk 'BEGIN{FS="|"}{if(NR=='$NR'){for(i=1;i<=NF;i++){if(i=='$setFid') print $i}}}' $tName 2>>./.error.log)
-        echo $oldValue
-        sed -i ''$NR's/'$oldValue'/'$newValue'/g' $tName 2>>./.error.log
-        echo "Row Updated Successfully"
-
-        fun_table_menu
-      fi
-    fi
-  fi
-
-}
+fun_update_table() {
+  
+    clear
+    mytables=($(ls -F | grep -v '_metadata' | sed 's/_data$//'))
+    counter=1
+    echo "+==================================+"
+    echo "|       Available Tables           |"
+    echo "+==================================+"
+    for table in "${mytables[@]}"; do
+        echo "|   $counter               $table "
+        echo "------------------------------------"
+        ((counter++))
+    done
+    echo
+    read -p "Enter the number of the Table: " table_number
+    if [[ $table_number =~ ^[0-9]+$ ]]; then
+        if [ "$table_number" -ge 1 ] && [ "$table_number" -le "${#mytables[@]}" ]; then
+            #Get Table Name
+            current_table="${mytables[$((table_number - 1))]}"
+            #Print Table content
+            clear
+            cat "./${current_table}_data"
+            echo
+            
+            read -p "Enter ID Number that you want to edit: " idNumber
+            table_Data=($(sed -n '1p' "./${current_table}_data" | tr ':' ' '))
+            value=$(awk -F':' '$1=="'$idNumber'"' "./${current_table}_data")
+            if [ "$value" == "" ]; then
+                echo "\"$idNumber\" doesn't exist"
+                sleep 3
+                fun_update_table
+            else
+                read -p "Enter the value that you want to update: " oldValue
+                currentRow=($(echo "$value" | tr ':' ' '))
+                if [[ "${currentRow[@]}" =~ "$oldValue" ]]; then
+                    read -p "Enter the new value: " newValue
+                    #Get The index of old value
+                    for index in "${!currentRow[@]}"; do
+                        if [ "${currentRow[$index]}" = "$oldValue" ]; then
+                            fIndex=$index
+                            data_types=($(sed -n '2p' "./${current_table}_metadata" | tr ':' ' '))
+                        fi
+                        
+                        
