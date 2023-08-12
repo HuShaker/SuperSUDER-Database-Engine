@@ -3,7 +3,7 @@
 
 fun_choose_table() {
 
-    #clear
+    clear
     mytables=($(ls -F | grep -v '_metadata' | sed 's/_data$//'))
     counter=1
     echo "+==================================+"
@@ -22,18 +22,17 @@ fun_choose_table() {
             current_table="${mytables[$((table_number - 1))]}"
             
         else
-            echo "Invalid table number."
+            fun_error "Invalid table number."
             sleep 3
             fun_choose_table
         fi
     else
-        echo "Invalid input. Please enter a valid number."
+        fun_error "Invalid input. Please enter a valid number."
         sleep 3
         fun_choose_table
     fi
 
 }
-
 
 fun_select_row() {
 
@@ -41,9 +40,11 @@ fun_select_row() {
     row=$(awk -F':' '$1=="'$idNumber'"' "./${current_table}_data") 
     if [ "$row" == "" ]; then
         
-        echo "ID number not exist"
+        fun_error "ID number not exist"
         sleep 3
-        clear
+        #clear
+        fun_select_row
+        
     else
         clear
         echo "$row"
@@ -84,9 +85,9 @@ fun_select_by_id() {
             row=$(awk -F':' '$1=="'$idNumber'"' "./${current_table}_data") 
             currentRow=($(echo "$row" | tr ':' ' '))
             clear
-            echo "The ${key_column_name} is: ${currentRow[$key_col_index]}"
+            echo -e "The ${key_column_name} is: ${currentRow[$key_col_index]}"
     else
-        echo "Invalid column number..."
+        fun_error "Invalid column number."
         sleep 3
         clear
         fun_Select_from_table
@@ -94,14 +95,17 @@ fun_select_by_id() {
 
 }
 
+
 fun_Select_from_table() {
 
     select option in "All" "Row" "ByID"; do
         case $option in
             "All")
                 fun_choose_table
+                clear
                 cat "${current_table}_data"
                 sleep 3
+                echo
                 fun_table_menu
                 ;;
             "Row")
@@ -112,10 +116,11 @@ fun_Select_from_table() {
             "ByID")
                 fun_choose_table
                 fun_select_by_id
+                echo
                 fun_table_menu
                 ;;
             *)
-                echo "Invalid selection. Please choose again."
+                fun_error "Invalid selection. Please choose again."
                 sleep 2
                 fun_table_menu
                 ;;

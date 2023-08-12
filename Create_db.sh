@@ -1,6 +1,4 @@
 #!/usr/bin/bash
-source ./Validate_Name.sh
-
 
 fun_create_database() {
 
@@ -17,7 +15,7 @@ fun_create_database() {
             fun_create_database
         else
             mkdir "./Data/$db_name"
-            echo "Database created successfully."
+            fun_success "Database created successfully."
             sleep 2
             clear
             fun_super_menu

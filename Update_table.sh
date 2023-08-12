@@ -28,7 +28,7 @@ fun_update_table() {
             table_Data=($(sed -n '1p' "./${current_table}_data" | tr ':' ' '))
             value=$(awk -F':' '$1=="'$idNumber'"' "./${current_table}_data")
             if [ "$value" == "" ]; then
-                echo "\"$idNumber\" doesn't exist"
+                fun_error "\"$idNumber\" doesn't exist"
                 sleep 3
                 fun_update_table
             else
@@ -40,45 +40,57 @@ fun_update_table() {
                     for index in "${!currentRow[@]}"; do
                         if [ "${currentRow[$index]}" = "$oldValue" ]; then
                             fIndex=$index
-                            data_types=($(sed -n '2p' "./${current_table}_metadata" | tr ':' ' '))
+                            data_types=($(sed -n '2p' "./${current_table}_metadata" | tr ':' ' '))    
                         fi
-                        
                     done
+                    #Get index of the old row in the file
+                    rowIndex=$(grep -nF "$value" "./${current_table}_data" | cut -d: -f1)
                     if [ "${data_types[$fIndex]}" == "string" ]; then
                         if fun_validate_name "$oldValue" && fun_validate_name "$newValue"; then
-                            #rownum=$(awk -v val="$value" '$0 ~ val {print NR}' "./${current_table}_metadata")
-                            #echo "$rownum"
-                            #sed -i "${rownum}s/$oldValue/$newValue/" "./${current_table}_data" 
-                            sed -i "s/$oldValue/$newValue/" "./${current_table}_data" 
-                            echo "Row Updated Successfully..."
+                            sed -i "$rowIndex s/$oldValue/$newValue/" "./${current_table}_data" 
+                            fun_success "Row Updated Successfully..."
                             sleep 3
                             clear
                             fun_table_menu
                         else
-                            echo "Your Values are not valid"
+                            fun_error "Your Values are not valid"
+                            sleep 3
+                            clear
+                            fun_update_table
+                        fi 
+                    fi 
+                    if [ "${data_types[$fIndex]}" == "number" ]; then
+                        if fun_validate_number "$oldValue" && fun_validate_number "$newValue"; then
+                            sed -i "$rowIndex s/$oldValue/$newValue/" "./${current_table}_data" 
+                            fun_success "Row Updated Successfully..."
+                            sleep 3
+                            clear
+                            fun_table_menu
+                        else
+                            fun_error "Your Values are not valid"
                             sleep 3
                             clear
                             fun_update_table
                         fi
                     else
-                        echo "Try again"
+                        fun_error "Try again"
                         sleep 3
                         fun_update_table   
-                    fi 
+                    fi
 
                 else
-                    echo "\"$oldValue\" doesn't exist"
+                    fun_error "\"$oldValue\" doesn't exist"
                     sleep 3
                     fun_update_table
                 fi
             fi
         else
-        echo "Invalid table number."
+        fun_error "Invalid table number."
         sleep 3
         fun_update_table
         fi
     else
-        echo "Invalid input. Please enter a valid number."
+        fun_error "Invalid input. Please enter a valid number."
         sleep 3
         fun_update_table
     fi
