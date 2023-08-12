@@ -15,22 +15,24 @@ source ./Update_Table.sh
 source ./Select_Table.sh
 source ./Delete_Table.sh
 source ./Success_Style.sh
+source ./Empty_Databases.sh
+source ./Empty_Tables.sh
 
 #============================================================ Functions ==================================================================
 
 function fun_super_menu {
 
-    echo "+==================================+"
-    echo "|          Super Menu              |"
-    echo "+==================================+"
-    echo "| Option |     Description         |"
-    echo "+--------+-------------------------+"
-    echo "|   1    | Create Database         |"
-    echo "|   2    | List Databases          |"
-    echo "|   3    | Drop Database           |"
-    echo "|   4    | Connect To Databases    |"
-    echo "|   5    | exit                    |"
-    echo "+--------+-------------------------+"
+    echo "╔══════════════════════════════════╗"
+    echo "║           Super Menu             ║"
+    echo "╠════════╦═════════════════════════╣"
+    echo "║ Option ║     Description         ║"
+    echo "╠════════╬═════════════════════════╣"
+    echo "║   1    ║ Create Database         ║"
+    echo "║   2    ║ List Databases          ║"
+    echo "║   3    ║ Drop Database           ║"
+    echo "║   4    ║ Connect To Databases    ║"
+    echo "║   5    ║ exit                    ║"
+    echo "╚════════╩═════════════════════════╝"
 
     echo -e "Enter Choice: \c"
     read smenu
@@ -50,21 +52,21 @@ function fun_super_menu {
 
 function fun_table_menu {
     
-    echo "+==================================+"
-    echo "|          Table Menu              |"
-    echo "+==================================+"
-    echo "| Option |     Description         |"
-    echo "+--------+-------------------------+"
-    echo "|   1    | Create table            |"
-    echo "|   2    | List tables             |"
-    echo "|   3    | Drop table              |"
-    echo "|   4    | Select from table       |"
-    echo "|   5    | Delete from table       |"
-    echo "|   6    | Update table            |"
-    echo "|   7    | Insert into Table       |"
-    echo "|   8    | Back to Super Menu      |"
-    echo "|   9    | Exit                    |"
-    echo "+--------+-------------------------+"
+    echo "╔══════════════════════════════════╗"
+    echo "║          Table Menu              ║"
+    echo "╠════════╦═════════════════════════╣"
+    echo "║ Option ║     Description         ║"
+    echo "╠════════╬═════════════════════════╣"
+    echo "║   1    ║ Create table            ║"
+    echo "║   2    ║ List tables             ║"
+    echo "║   3    ║ Drop table              ║"
+    echo "║   4    ║ Select from table       ║"
+    echo "║   5    ║ Delete from table       ║"
+    echo "║   6    ║ Update table            ║"
+    echo "║   7    ║ Insert into Table       ║"
+    echo "║   8    ║ Back to Super Menu      ║"
+    echo "║   9    ║ Exit                    ║"
+    echo "╚════════╩═════════════════════════╝"
 
     echo -e "Enter Choice: \c"
     read smenu
