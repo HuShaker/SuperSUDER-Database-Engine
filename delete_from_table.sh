@@ -65,3 +65,4 @@ fun_delete_from_table() {
         esac
     done
 }
+

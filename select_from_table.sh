@@ -3,34 +3,52 @@
 
 fun_choose_table() {
 
-    clear
-    mytables=($(ls -F | grep -v '_metadata' | sed 's/_data$//'))
-    counter=1
-    echo "+==================================+"
-    echo "|       Available Tables           |"
-    echo "+==================================+"
-    for table in "${mytables[@]}"; do
-        echo "|   $counter               $table "
-        echo "------------------------------------"
-        ((counter++))
-    done
-    echo
-    read -p "Enter the number of the Table: " table_number
-    if [[ $table_number =~ ^[0-9]+$ ]]; then
-        if [ "$table_number" -ge 1 ] && [ "$table_number" -le "${#mytables[@]}" ]; then
-            #Get Table Name
-            current_table="${mytables[$((table_number - 1))]}"
-            
+        clear
+        mytables=($(ls -F | grep -v '_metadata' | sed 's/_data$//'))
+        counter=1
+        echo "╔══════════════════════════════════╗"
+        echo "║           Column Names           ║"
+        echo "╠════════╦═════════════════════════╣"
+        echo "║ Option ║     Description         ║"
+        echo "╠════════╩═════════════════════════╣"
+        for table in "${mytables[@]}"; do
+            echo "║   $counter           $table "
+            if [ "$table" == "${mytables[-1]}" ]; then
+                echo "╚══════════════════════════════════╝"
+            else
+                echo "╠══════════════════════════════════╣"
+            fi
+            ((counter++))
+        done
+        echo
+        read -p "Enter the number of the Table: " table_number
+        #Get number of Databases
+        count=$(ls | wc -l)
+        #Check is Empty or not
+        if [ "$count" -eq 0 ]; then
+            #clear
+            fun_empty_tables
+            sleep 2
+            #clear
+            fun_header_note
+            fun_table_menu
         else
-            fun_error "Invalid table number."
-            sleep 3
-            fun_choose_table
+            if [[ $table_number =~ ^[0-9]+$ ]]; then
+                if [ "$table_number" -ge 1 ] && [ "$table_number" -le "${#mytables[@]}" ]; then
+                    #Get Table Name
+                    current_table="${mytables[$((table_number - 1))]}"
+                    
+                else
+                    fun_error "Invalid table number."
+                    sleep 3
+                    fun_choose_table
+                fi
+            else
+                fun_error "Invalid input. Please enter a valid number."
+                sleep 3
+                fun_choose_table
+            fi
         fi
-    else
-        fun_error "Invalid input. Please enter a valid number."
-        sleep 3
-        fun_choose_table
-    fi
 
 }
 
@@ -98,32 +116,33 @@ fun_select_by_id() {
 
 fun_Select_from_table() {
 
-    select option in "All" "Row" "ByID"; do
-        case $option in
-            "All")
-                fun_choose_table
-                clear
-                cat "${current_table}_data"
-                sleep 3
-                echo
-                fun_table_menu
-                ;;
-            "Row")
-                fun_choose_table
-                fun_select_row
-                fun_table_menu
-                ;;
-            "ByID")
-                fun_choose_table
-                fun_select_by_id
-                echo
-                fun_table_menu
-                ;;
-            *)
-                fun_error "Invalid selection. Please choose again."
-                sleep 2
-                fun_table_menu
-                ;;
-        esac
-    done
+        select option in "All" "Row" "ByID"; do
+            case $option in
+                "All")
+                    fun_choose_table
+                    clear
+                    cat "${current_table}_data"
+                    sleep 3
+                    echo
+                    fun_table_menu
+                    ;;
+                "Row")
+                    fun_choose_table
+                    fun_select_row
+                    fun_table_menu
+                    ;;
+                "ByID")
+                    fun_choose_table
+                    fun_select_by_id
+                    echo
+                    fun_table_menu
+                    ;;
+                *)
+                    fun_error "Invalid selection. Please choose again."
+                    sleep 2
+                    fun_table_menu
+                    ;;
+            esac
+        done
+
 }

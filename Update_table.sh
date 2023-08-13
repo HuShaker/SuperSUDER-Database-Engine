@@ -5,12 +5,18 @@ fun_update_table() {
     clear
     mytables=($(ls -F | grep -v '_metadata' | sed 's/_data$//'))
     counter=1
-    echo "+==================================+"
-    echo "|       Available Tables           |"
-    echo "+==================================+"
+    echo "╔══════════════════════════════════╗"
+    echo "║           Column Names           ║"
+    echo "╠════════╦═════════════════════════╣"
+    echo "║ Option ║     Description         ║"
+    echo "╠════════╩═════════════════════════╣"
     for table in "${mytables[@]}"; do
-        echo "|   $counter               $table "
-        echo "------------------------------------"
+        echo "║   $counter           $table "
+        if [ "$table" == "${mytables[-1]}" ]; then
+            echo "╚══════════════════════════════════╝"
+        else
+            echo "╠══════════════════════════════════╣"
+        fi
         ((counter++))
     done
     echo
